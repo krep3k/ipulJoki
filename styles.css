@@ -1,0 +1,351 @@
+/* --- RESET & BASIC SETUP --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #050714; /* Langit malam gelap */
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+}
+
+/* --- BACKGROUND STARS ANIMATION --- */
+#stars-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+    overflow: hidden;
+}
+
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0;
+    animation: twinkle var(--duration) ease-in-out infinite;
+}
+
+@keyframes twinkle {
+    0% { opacity: 0; transform: scale(0.5); }
+    50% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 10px white; }
+    100% { opacity: 0; transform: scale(0.5); }
+}
+
+/* --- MOON DECORATION --- */
+.moon {
+    position: fixed;
+    top: 50px;
+    right: 50px;
+    width: 100px;
+    height: 100px;
+    background: #fdfd96;
+    border-radius: 50%;
+    box-shadow: 0 0 60px #fdfd96, 0 0 100px #ffff;
+    z-index: -1;
+    opacity: 0.8;
+}
+
+/* --- NAVIGATION --- */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 20px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: 0.3s;
+}
+
+.logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #00d2ff;
+    text-shadow: 0 0 10px #00d2ff;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-left: 30px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+    position: relative;
+}
+
+nav ul li a:hover {
+    color: #00d2ff;
+    text-shadow: 0 0 10px #00d2ff;
+}
+
+/* --- SECTIONS GENERAL --- */
+section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 20px;
+    position: relative;
+}
+
+h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3rem;
+    margin-bottom: 50px;
+    text-align: center;
+    background: linear-gradient(to right, #fff, #00d2ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* --- ANIMATION CLASSES (SCROLL TRIGGER) --- */
+.reveal {
+    opacity: 0;
+    transition: all 1s cubic-bezier(0.5, 0, 0, 1);
+}
+
+.reveal-up { transform: translateY(100px); }
+.reveal-left { transform: translateX(-100px); }
+.reveal-right { transform: translateX(100px); }
+.reveal-zoom { transform: scale(0.5); }
+
+/* KELAS AKTIF (Saat masuk viewport) */
+.reveal.active {
+    opacity: 1;
+    transform: translate(0) scale(1);
+}
+
+/* --- HERO SECTION --- */
+#home { text-align: center; }
+
+.profile-container {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid #00d2ff;
+    box-shadow: 0 0 30px #00d2ff, inset 0 0 20px #00d2ff;
+    margin-bottom: 30px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.profile-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.profile-container:hover img { transform: scale(1.1); }
+
+.hero-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 4rem;
+    font-weight: 700;
+    text-shadow: 0 0 20px rgba(0, 210, 255, 0.8);
+    margin-bottom: 10px;
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    color: #aaa;
+    margin-bottom: 30px;
+}
+
+/* --- BUTTONS --- */
+.btn-cta {
+    padding: 15px 40px;
+    background: linear-gradient(45deg, #00d2ff, #007bff);
+    border: none;
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(0, 210, 255, 0.5);
+    transition: 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-cta:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 40px rgba(0, 210, 255, 0.8);
+}
+
+.small-btn {
+    font-size: 0.8rem;
+    padding: 10px 20px;
+}
+
+/* --- CARDS --- */
+.cards-container {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.05);
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 20px;
+    width: 300px;
+    text-align: center;
+    transition: 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.card:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-10px);
+    border-color: #00d2ff;
+}
+
+.card h3 {
+    font-family: 'Orbitron', sans-serif;
+    color: #ffd700;
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+}
+
+.highlight-blue { color: #00d2ff !important; }
+.highlight-red { color: #ff0055 !important; }
+
+.card p {
+    color: #ddd;
+    margin-bottom: 20px;
+}
+
+.card .price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 20px;
+    display: block;
+}
+
+/* --- STATS --- */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+    width: 80%;
+    text-align: center;
+}
+
+.stat-item h3 {
+    font-size: 3.5rem;
+    font-family: 'Orbitron', sans-serif;
+    color: #00d2ff;
+}
+
+/* --- CONTACT --- */
+.contact-box {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 50px;
+    border-radius: 20px;
+    border: 1px solid #00d2ff;
+    text-align: center;
+    max-width: 600px;
+}
+
+.contact-text {
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+    .hero-title { font-size: 2.5rem; }
+    nav { padding: 20px; flex-direction: column; }
+    nav ul { margin-top: 15px; }
+    .moon { width: 60px; height: 60px; top: 20px; right: 20px; }
+}
+
+/* --- TAMBAHAN UNTUK HALAMAN BARU --- */
+
+/* Table Styling untuk Services */
+.price-table {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.05);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 210, 255, 0.3);
+}
+
+.price-table th, .price-table td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.price-table th {
+    background: rgba(0, 210, 255, 0.2);
+    color: #00d2ff;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 1px;
+}
+
+.price-table tr:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Match History Styling untuk Stats */
+.match-history {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 600px;
+}
+
+.match-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(90deg, rgba(0,255,100,0.1), transparent);
+    border-left: 5px solid #00ff66; /* Hijau untuk Menang/MVP */
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.match-result { font-weight: bold; color: #00ff66; font-family: 'Orbitron', sans-serif; }
+.hero-name { color: #fff; }
+.kda { color: #aaa; font-size: 0.9rem; }
